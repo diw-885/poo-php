@@ -1,12 +1,18 @@
 <?php
 
 require 'BankAccount.php';
+require 'Owner.php';
+
+$owner01 = new Owner('Matthieu');
+$owner02 = new Owner('Marina');
 
 $bankAccount01 = new BankAccount(null, 'Matthieu'); // Matthieu a 0 sur son compte
 $bankAccount02 = new BankAccount(null, 'Nassim');
 $bankAccount03 = new BankAccount(null, 'Toto');
 $bankAccount04 = new BankAccount(null, 'Titi');
 $bankAccount05 = new BankAccount(null, 'Tata');
+
+$bankAccount01->addOwner($owner01)->addOwner($owner02);
 
 echo $bankAccount01->getBalance().'<br />';
 
@@ -18,7 +24,13 @@ $bankAccount01->withdrawMoney(1000);
 
 echo $bankAccount01->getBalance().'<br />';
 
-var_dump($bankAccount01);
-var_dump($bankAccount02);
+require 'print_r.php';
 
-var_dump(BankAccount::$accountList);
+super_print_r($bankAccount01);
+echo '<br /><br />';
+super_print_r($bankAccount02);
+echo '<br /><br />';
+super_print_r($bankAccount01->getOwners()); // Matthieu, Marina
+echo '<br /><br />';
+
+super_print_r(BankAccount::$accountList);

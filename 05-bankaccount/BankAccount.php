@@ -6,6 +6,7 @@ class BankAccount
     private $owner;
     private $amount = 0;
     public static $accountList = [];
+    private $ownerList = [];
 
     public function __construct($id, $owner, $amount = 0)
     {
@@ -40,5 +41,20 @@ class BankAccount
         $this->amount -= $withdraw;
 
         return $this;
+    }
+
+    public function addOwner($o)
+    {
+        $this->ownerList[] = $o;
+
+        return $this;
+    }
+
+    public function getOwners()
+    {
+        foreach ($this->ownerList as $owner) {
+            echo $owner->name;
+        }
+        //return $this->ownerList;
     }
 }
