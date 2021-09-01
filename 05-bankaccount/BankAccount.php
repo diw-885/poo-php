@@ -43,6 +43,9 @@ class BankAccount
         return $this;
     }
 
+    /**
+     * Ajoute un nouveau propriétaire sur le compte.
+     */
     public function addOwner($o)
     {
         $this->ownerList[] = $o;
@@ -56,5 +59,17 @@ class BankAccount
             echo $owner->name;
         }
         //return $this->ownerList;
+    }
+
+    public function wireTo($target, $wireTo)
+    {
+        // $this est le compte $bankAccount01 qui fait le virement
+        $this->amount -= $wireTo;
+        // $target est le compte $bankAccount02 qui reçoit le virement
+        $target->amount += $wireTo;
+
+        // 2ème version. On peut utiliser les méthodes des objets dans les méthodes
+        // $this->withdrawMoney($wireTo);
+        // $target->depositMoney($wireTo);
     }
 }

@@ -18,11 +18,17 @@ echo $bankAccount01->getBalance().'<br />';
 
 $bankAccount01->depositMoney(1000)->depositMoney(1000);
 
-echo $bankAccount01->getBalance().'<br />';
+echo 'Montant Compte 1 :'.$bankAccount01->getBalance().'<br />';
+echo 'Montant Compte 2 :'.$bankAccount02->getBalance().'<br />';
 
 $bankAccount01->withdrawMoney(1000);
 
-echo $bankAccount01->getBalance().'<br />';
+// Virement
+$bankAccount01->wireTo($bankAccount02, 1000);
+// $bankAccount02->wireTo($bankAccount01, 1000);
+
+echo 'Montant Compte 1 :'.$bankAccount01->getBalance().'<br />';
+echo 'Montant Compte 2 :'.$bankAccount02->getBalance().'<br />';
 
 require 'print_r.php';
 
