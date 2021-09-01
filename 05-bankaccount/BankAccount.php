@@ -5,12 +5,22 @@ class BankAccount
     private $id;
     private $owner;
     private $amount = 0;
+    public static $accountList = [];
 
     public function __construct($id, $owner, $amount = 0)
     {
-        $this->id = $id;
+        // $this->id = $id;
+        $this->id = str_pad(rand(1, 6), 7, '0', STR_PAD_LEFT);
         $this->owner = $owner;
         $this->amount = $amount;
+
+        // On va s'assurer que l'id est unique
+        while (in_array($this->id, self::$accountList)) {
+            $this->id = str_pad(rand(1, 6), 7, '0', STR_PAD_LEFT);
+        }
+
+        // On va ajouter l'id du compte à la liste des comptes
+        self::$accountList[] = $this->id;
     }
 
     public function getBalance()
