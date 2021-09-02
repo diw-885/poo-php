@@ -18,8 +18,21 @@ echo '<br />';
 
 $aragorn->attack($legolas); // Enlève X points de vie en fonction de la force (Force x 2)
 $legolas->attack($aragorn);
-//$legolas->rangedAttack($gandalf); // Enlève X points de vie si le personnage est chasseur (Force x 3)
-//$gandalf->castSpell($aragorn); // Enlève X points de vie en fonction du mana (Mana x 3)
+$legolas->rangedAttack($gandalf); // Enlève X points de vie si le personnage est chasseur (Force x 3)
+$gandalf->castSpell($aragorn); // Enlève X points de vie en fonction du mana (Mana x 3)
+$legolas->attack($aragorn);
+$legolas->attack($aragorn);
+
+$legolas->rangedAttack($gandalf);
+$legolas->rangedAttack($gandalf);
+$legolas->rangedAttack($gandalf);
+$legolas->rangedAttack($gandalf);
+$legolas->rangedAttack($gandalf);
+
+$gandalf->castSpell($legolas);
+$gandalf->castSpell($legolas);
+$gandalf->castSpell($legolas);
+$gandalf->castSpell($legolas);
 
 var_dump($aragorn);
 echo '<br />';

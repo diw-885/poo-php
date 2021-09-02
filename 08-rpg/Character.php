@@ -2,8 +2,8 @@
 
 class Character
 {
-    private $name;
-    private $pv = 100;
+    protected $name;
+    protected $pv = 100;
     protected $strenght = 10;
     protected $mana = 10;
 
@@ -20,6 +20,20 @@ class Character
 
         echo $this->name.' attaque '.$target->name.' <br />';
 
+        $this->checkKill($target);
+
         return $this;
+    }
+
+    /**
+     * La méthode est utilisable uniquement dans la classe et les enfants
+     */
+    protected function checkKill($target)
+    {
+        if ($target->pv <= 0) {
+            $target->pv = 0;
+
+            echo $this->name.' a tué '.$target->name.' <br />';
+        }
     }
 }
