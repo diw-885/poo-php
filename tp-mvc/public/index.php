@@ -59,7 +59,7 @@ $router->map('GET', '/films', function () {
     // $movies = Model\Movie::all();
 
     // Ce fichier représente la vue.
-    require __DIR__.'/../templates/movies/index.php';
+    require __DIR__.'/../templates/movies/list.php';
 });
 
 // Cette page représente un formulaire permettant d'ajouter un élément dans une BDD

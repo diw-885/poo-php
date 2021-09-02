@@ -8,6 +8,9 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+        <!-- Mon CSS -->
+        <link rel="stylesheet" href="<?= BASE_URL ?>css/style.css">
+
         <title>TITRE</title>
     </head>
     <body>
