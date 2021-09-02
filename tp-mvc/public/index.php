@@ -68,6 +68,7 @@ $router->map('GET|POST', '/film/creer', function () {
     // Si la requête HTTP est en POST, le formulaire est soumis
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // On "sanitize" les données
+        // htmlspecialchars('<h1>a</h1>') => &lt;h1&gt;a&lt;/h1&gt;
         $title = trim(htmlspecialchars($_POST['title']));
         $description = trim(htmlspecialchars($_POST['description']));
 
@@ -87,7 +88,11 @@ $router->map('GET|POST', '/film/creer', function () {
                 'description' => $description,
             ]);
 
+            // Message de succès
             $success = 'Le film a été ajouté';
+
+            // ou Redirection vers la liste des films
+            header('Location: '.BASE_URL.'films');
         }
 
         // TODO: On peut créer un modèle...
