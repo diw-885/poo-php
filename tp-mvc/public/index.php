@@ -101,6 +101,53 @@ $router->map('GET|POST', '/film/creer', function () {
     require __DIR__.'/../templates/movies/create.php';
 });
 
+// Cette page permet de modifier un film
+$router->map('GET|POST', '/film/[i:id]/modifier', function ($id) {
+    // requête sql pour récupèrer le film qu'on modifie
+    $movie = Database::selectOne('select * from movies where id = :id', ['id' => $id]);
+
+    // Traitement du formulaire
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $title = trim(htmlspecialchars($_POST['title']));
+        $description = trim(htmlspecialchars($_POST['description']));
+
+        // Vérification des erreurs
+        if (empty($title)) {
+            $errors['title'] = 'Le titre est vide.';
+        }
+
+        if (empty($description)) {
+            $errors['description'] = 'La description est vide.';
+        }
+
+        if (empty($errors)) {
+            // Modification en base de données
+            Database::query('update movies set title = :title, description = :description where id = :id', [
+                'id' => $id,
+                'title' => $title,
+                'description' => $description,
+            ]);
+
+            // Message de succès
+            $success = 'Le film a été modifié';
+
+            // ou Redirection vers la liste des films
+            header('Location: '.BASE_URL.'films');
+        }
+    }
+
+    require __DIR__.'/../templates/movies/edit.php';
+});
+
+// Cette page permet de supprimer un film de la base de données
+$router->map('GET', '/film/[i:id]/supprimer', function ($id) {
+    // $id est comme un $_GET['id']
+    // Requête SQL pour supprimer le film concerné
+    Database::query('delete from movies where id = :id', ['id' => $id]);
+    // Après la suppression, on redirige vers la liste des films
+    header('Location: '.BASE_URL.'films');
+});
+
 // Voici une route avec un exemple de Controller
 $router->map('GET', '/controller', 'MovieController@index');
 

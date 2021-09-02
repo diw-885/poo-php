@@ -30,6 +30,14 @@ class Database
         return $query->fetchAll();
     }
 
+    public static function selectOne($sql, $bindings = [])
+    {
+        $query = self::get()->prepare($sql);
+        $query->execute($bindings);
+
+        return $query->fetch();
+    }
+
     public static function query($sql, $bindings = [])
     {
         return self::get()->prepare($sql)->execute($bindings);
