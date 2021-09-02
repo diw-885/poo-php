@@ -153,5 +153,6 @@ $router->map('GET', '/controller', 'MovieController@index');
 
 /**
  * Permet d'exécuter l'application.
+ * Ce code doit être la dernière ligne du fichier.
  */
 $router->run();
