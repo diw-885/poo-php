@@ -7,8 +7,7 @@
  * BASE_URL va servir à générer correctement les liens du menu ou du site.
  */
 
-// define('BASE_URL', '/poo-php/tp-mvc/public');
-define('BASE_URL', '/php-oo/12-newsuperheroes/public/');
+define('BASE_URL', '/poo-php/tp-mvc/public/');
 define('DB_DATABASE', 'webflix');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
@@ -43,6 +42,11 @@ $router->setBasePath(rtrim(BASE_URL, '/'));
 $router->map('GET', '/', function () {
     // On écrit le HTML dans un autre fichier qui représente la vue
     require __DIR__.'/../templates/home.php';
+});
+
+$router->map('GET', '/nous-contacter', function () {
+    // __DIR__ => C:\xampp\htdocs\poo-php\tp-mvc\public
+    require __DIR__.'/../templates/contact.php';
 });
 
 // Cette page représente une liste de films provenant d'une base de données
