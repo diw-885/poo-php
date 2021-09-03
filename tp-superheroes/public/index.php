@@ -99,6 +99,41 @@ $router->map('GET', '/heros', function () {
 $router->map('GET|POST', '/hero/[i:id]/modifier', function ($id) {
     $heroe = Database::selectOne('select * from superheroes where id = :id', ['id' => $id]);
 
+    $errors = [];
+    // Traitement du formulaire
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Récupèration et clean des valeurs du formulaire
+        $name = trim(htmlspecialchars($_POST['name']));
+        $power = trim(htmlspecialchars($_POST['power']));
+        $identity = trim(htmlspecialchars($_POST['identity']));
+        $universe = trim(htmlspecialchars($_POST['universe']));
+
+        if (empty($name)) {
+            $errors['name'] = 'Le nom est vide.';
+        }
+
+        if (empty($power)) {
+            $errors['power'] = 'Le pouvoir est vide.';
+        }
+
+        if (empty($identity)) {
+            $errors['identity'] = 'L\'identité est vide.';
+        }
+
+        if (empty($universe)) {
+            $errors['universe'] = 'L\'univers est vide.';
+        }
+
+        if (empty($errors)) {
+            Database::query(
+                'update superheroes set name = :name, power = :power, identity = :identity, universe = :universe where id = :id',
+                ['id' => $id, 'name' => $name, 'power' => $power, 'identity' => $identity, 'universe' => $universe]
+            );
+
+            header('Location: '.BASE_URL.'heros');
+        }
+    }
+
     require __DIR__.'/../templates/heroes/edit.php';
 });
 
@@ -109,11 +144,11 @@ $router->map('GET', '/hero/[i:id]/supprimer', function ($id) {
     header('Location: '.BASE_URL.'heros');
 });
 
-// Version avec Controller
-$router->map('GET|POST', '/heros/nouveau', 'SuperHeroeController@create');
-$router->map('GET', '/heros', 'SuperHeroeController@list');
-$router->map('GET|POST', '/hero/[i:id]/modifier', 'SuperHeroeController@edit');
-$router->map('GET|POST', '/hero/[i:id]/supprimer', 'SuperHeroeController@delete');
+// Version avec Controller pour les super vilains
+$router->map('GET|POST', '/vilains/nouveau', 'SuperNaughtyController@create');
+$router->map('GET', '/vilains', 'SuperNaughtyController@list');
+$router->map('GET|POST', '/vilain/[i:id]/modifier', 'SuperNaughtyController@edit');
+$router->map('GET|POST', '/vilain/[i:id]/supprimer', 'SuperNaughtyController@delete');
 
 /**
  * Permet d'exécuter l'application.

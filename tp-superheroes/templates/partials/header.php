@@ -11,12 +11,12 @@
         <!-- Mon CSS -->
         <link rel="stylesheet" href="<?= BASE_URL ?>css/style.css">
 
-        <title>TITRE</title>
+        <title>Super Héros</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="<?= BASE_URL; ?>">TITRE</a>
+                <a class="navbar-brand" href="<?= BASE_URL; ?>">Super Héros</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -26,7 +26,13 @@
                             <a class="nav-link" href="<?= BASE_URL; ?>heros">Super Héros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL; ?>heros/nouveau">Créer un Héros</a>
+                            <a class="nav-link" href="<?= BASE_URL; ?>heros/nouveau">Créer un Héro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL; ?>vilains">Super Vilains</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL; ?>vilains/nouveau">Créer un Vilain</a>
                         </li>
                     </ul>
                 </div>
