@@ -208,6 +208,18 @@ $router->map('GET', '/categorie/[i:id]/supprimer', function ($id) {
     header('Location: '.BASE_URL.'categories');
 });
 
+// Cette page permet de lier un film à une ou plusieurs catégories
+$router->map('GET|POST', '/liaison', function () {
+    $movies = Database::select('select * from movies');
+    $categories = Database::select('select * from categories');
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        dump($_POST);
+    }
+
+    require __DIR__.'/../templates/liaison.php';
+});
+
 // Voici une route avec un exemple de Controller
 $router->map('GET', '/controller', 'MovieController@index');
 
