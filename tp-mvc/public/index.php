@@ -148,6 +148,66 @@ $router->map('GET', '/film/[i:id]/supprimer', function ($id) {
     header('Location: '.BASE_URL.'films');
 });
 
+// La page qui liste les catégories
+$router->map('GET', '/categories', function () {
+    $categories = Database::select('select * from categories');
+    require __DIR__.'/../templates/categories/list.php';
+});
+
+// La page qui permet de créer une catégorie
+$router->map('GET|POST', '/categorie/creer', function () {
+    $errors = [];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name = trim(htmlspecialchars($_POST['name']));
+
+        if (empty($name)) {
+            $errors['name'] = 'Le nom est vide.';
+        }
+
+        if (empty($errors)) {
+            Database::query('insert into categories (name) VALUES (:name)', [
+                'name' => $name,
+            ]);
+
+            $success = 'La catégorie a été ajoutée';
+            header('Location: '.BASE_URL.'categories');
+        }
+    }
+
+    require __DIR__.'/../templates/categories/create.php';
+});
+
+// Cette page permet de modifier une catégorie
+$router->map('GET|POST', '/categorie/[i:id]/modifier', function ($id) {
+    $category = Database::selectOne('select * from categories where id = :id', ['id' => $id]);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name = trim(htmlspecialchars($_POST['name']));
+
+        if (empty($name)) {
+            $errors['name'] = 'Le nom est vide.';
+        }
+
+        if (empty($errors)) {
+            Database::query('update categories set name = :name where id = :id', [
+                'id' => $id,
+                'name' => $name,
+            ]);
+
+            $success = 'La catégorie a été modifiée';
+            header('Location: '.BASE_URL.'categories');
+        }
+    }
+
+    require __DIR__.'/../templates/categories/edit.php';
+});
+
+// Cette page permet de supprimer une catégorie de la base de données
+$router->map('GET', '/categorie/[i:id]/supprimer', function ($id) {
+    Database::query('delete from categories where id = :id', ['id' => $id]);
+    header('Location: '.BASE_URL.'categories');
+});
+
 // Voici une route avec un exemple de Controller
 $router->map('GET', '/controller', 'MovieController@index');
 

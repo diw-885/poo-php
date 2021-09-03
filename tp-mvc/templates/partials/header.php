@@ -23,10 +23,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL; ?>films">Liste</a>
+                            <a class="nav-link" href="<?= BASE_URL; ?>films">Films</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL; ?>film/creer">Créer</a>
+                            <a class="nav-link" href="<?= BASE_URL; ?>film/creer">Créer un film</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL; ?>categories">Catégories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL; ?>categorie/creer">Créer une catégorie</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL; ?>nous-contacter">Contact</a>

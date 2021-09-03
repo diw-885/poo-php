@@ -1,3 +1,8 @@
+# Ce fichier sera executé par le serveur web Apache
+# Il va simplement rediriger les URLs
+# https://localhost/PEUIMPORTE/public/nous-contacter =>
+# https://localhost/PEUIMPORTE/public/index.php/nous-contacter
+
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]
