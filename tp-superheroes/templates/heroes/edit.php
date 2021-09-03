@@ -1,7 +1,7 @@
 <?php require __DIR__.'/../partials/header.php'; ?>
 
 <div class="container py-4">
-    <h1>Créer un super héros</h1>
+    <h1>Modifier le super héros <?= $heroe->name; ?></h1>
 
     <?php if (! empty($errors)) { ?>
         <div class="alert alert-danger">
@@ -16,17 +16,17 @@
     <form method="post">
         <div class="form-group">
             <label for="name">Nom</label>
-            <input type="text" id="name" name="name" class="form-control">
+            <input type="text" id="name" name="name" class="form-control" value="<?= $heroe->name; ?>">
         </div>
 
         <div class="form-group">
             <label for="power">Pouvoir</label>
-            <input type="text" id="power" name="power" class="form-control">
+            <input type="text" id="power" name="power" class="form-control" value="<?= $heroe->power; ?>">
         </div>
 
         <div class="form-group">
             <label for="identity">Identité</label>
-            <input type="text" id="identity" name="identity" class="form-control">
+            <input type="text" id="identity" name="identity" class="form-control" value="<?= $heroe->identity; ?>">
         </div>
 
         <div class="form-group">
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary btn-block">Ajouter</button>
+        <button class="btn btn-primary btn-block">Modifier</button>
     </form>
 </div>
 

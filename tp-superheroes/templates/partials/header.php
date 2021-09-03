@@ -23,7 +23,10 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_URL; ?>films">Films</a>
+                            <a class="nav-link" href="<?= BASE_URL; ?>heros">Super Héros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL; ?>heros/nouveau">Créer un Héros</a>
                         </li>
                     </ul>
                 </div>

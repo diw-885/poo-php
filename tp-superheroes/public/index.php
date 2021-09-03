@@ -50,8 +50,70 @@ $router->map('GET', '/', function () {
 
 // Création d'un super héros
 $router->map('GET|POST', '/heros/nouveau', function () {
+    $errors = [];
+    // Traitement du formulaire
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Récupèration et clean des valeurs du formulaire
+        $name = trim(htmlspecialchars($_POST['name']));
+        $power = trim(htmlspecialchars($_POST['power']));
+        $identity = trim(htmlspecialchars($_POST['identity']));
+        $universe = trim(htmlspecialchars($_POST['universe']));
+
+        if (empty($name)) {
+            $errors['name'] = 'Le nom est vide.';
+        }
+
+        if (empty($power)) {
+            $errors['power'] = 'Le pouvoir est vide.';
+        }
+
+        if (empty($identity)) {
+            $errors['identity'] = 'L\'identité est vide.';
+        }
+
+        if (empty($universe)) {
+            $errors['universe'] = 'L\'univers est vide.';
+        }
+
+        if (empty($errors)) {
+            Database::query(
+                'insert into superheroes (name, power, identity, universe) values (:name, :power, :identity, :universe)',
+                ['name' => $name, 'power' => $power, 'identity' => $identity, 'universe' => $universe]
+            );
+
+            header('Location: '.BASE_URL.'heros');
+        }
+    }
+
     require __DIR__.'/../templates/heroes/create.php';
 });
+
+// Listing des supers héros
+$router->map('GET', '/heros', function () {
+    $heroes = Database::select('select * from superheroes');
+
+    require __DIR__.'/../templates/heroes/list.php';
+});
+
+// Modification d'un super héros
+$router->map('GET|POST', '/hero/[i:id]/modifier', function ($id) {
+    $heroe = Database::selectOne('select * from superheroes where id = :id', ['id' => $id]);
+
+    require __DIR__.'/../templates/heroes/edit.php';
+});
+
+// Suppression d'un super héros
+$router->map('GET', '/hero/[i:id]/supprimer', function ($id) {
+    Database::query('delete from superheroes where id = :id', ['id' => $id]);
+
+    header('Location: '.BASE_URL.'heros');
+});
+
+// Version avec Controller
+$router->map('GET|POST', '/heros/nouveau', 'SuperHeroeController@create');
+$router->map('GET', '/heros', 'SuperHeroeController@list');
+$router->map('GET|POST', '/hero/[i:id]/modifier', 'SuperHeroeController@edit');
+$router->map('GET|POST', '/hero/[i:id]/supprimer', 'SuperHeroeController@delete');
 
 /**
  * Permet d'exécuter l'application.
