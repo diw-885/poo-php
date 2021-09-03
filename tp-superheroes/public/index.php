@@ -7,7 +7,7 @@
  * BASE_URL va servir à générer correctement les liens du menu ou du site.
  */
 
-define('BASE_URL', '/poo-php/tp-mvc/public/');
+define('BASE_URL', '/poo-php/tp-superheroes/public/');
 define('DB_DATABASE', 'webflix');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
