@@ -214,7 +214,20 @@ $router->map('GET|POST', '/liaison', function () {
     $categories = Database::select('select * from categories');
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        dump($_POST);
+        $movieId = trim(htmlspecialchars($_POST['movie'])); // 2
+        // On définit un tableau vide si aucune checkboxe cochée
+        $categoriesIds = $_POST['categories'] ?? []; // [1, 2, 3]
+
+        // Vérification que $movieId existe dans la BDD et idem pour $categoriesIds
+
+        // Requête SQL pour la liaison
+        // Pour chaque catégorie à associer au film, on fait un insert
+        foreach ($categoriesIds as $categoryId) {
+            Database::query(
+                'insert into category_movie (category_id, movie_id) values (:categoryId, :movieId)',
+                ['categoryId' => $categoryId, 'movieId' => $movieId]
+            );
+        }
     }
 
     require __DIR__.'/../templates/liaison.php';
