@@ -48,6 +48,11 @@ $router->map('GET', '/', function () {
  * Ici, on peut créer les pages...
  */
 
+// Création d'un super héros
+$router->map('GET|POST', '/heros/nouveau', function () {
+    require __DIR__.'/../templates/heroes/create.php';
+});
+
 /**
  * Permet d'exécuter l'application.
  * Ce code doit être la dernière ligne du fichier.
