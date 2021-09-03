@@ -8,7 +8,7 @@
  */
 
 define('BASE_URL', '/poo-php/tp-superheroes/public/');
-define('DB_DATABASE', 'webflix');
+define('DB_DATABASE', 'super');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
