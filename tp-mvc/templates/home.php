@@ -48,6 +48,19 @@
         <li>supernaughty_id INT FK</li>
     </ul>
 
+    <p>Voici quelques exemples pour vous donner de l'inspiration: </p>
+
+    <pre><code>
+        (1, 'Batman', 'Riche et entraîné', 'Bruce Wayne', 'DC', 'batman.png'),
+        (2, 'Captain America', 'Immortel', 'Steve Rogers', 'Marvel', 'captain-america.png'),
+        (3, 'Groot', 'Renaissance', 'Groot', 'Marvel', 'groot.png'),
+        (4, 'Iron Man', 'Riche', 'Tony Stark', 'Marvel', 'iron-man.png'),
+        (5, 'Spider man', 'Souple', 'Peter Parker', 'Marvel', 'spider-man.png')
+
+        (1, 'Joker', 'Embêter Batman', 'Jack Napier', 'DC', 'joker.png'),
+        (2, 'Thanos', 'Sauver le monde ?', 'Thanos', 'Marvel', 'thanos.png')
+    </code></pre>
+
     <h2>TP4 - Sans formateur</h2>
 
     <p>Créer un formulaire permettant d'ajouter un super héros</p>
