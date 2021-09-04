@@ -150,6 +150,26 @@ $router->map('GET', '/vilains', 'SuperNaughtyController@list');
 $router->map('GET|POST', '/vilain/[i:id]/modifier', 'SuperNaughtyController@edit');
 $router->map('GET|POST', '/vilain/[i:id]/supprimer', 'SuperNaughtyController@delete');
 
+// Association
+$router->map('GET|POST', '/association', function () {
+    $heroes = Database::select('select * from superheroes');
+    $naughties = Database::select('select * from supernaughties');
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $heroeId = trim(htmlspecialchars($_POST['heroe']));
+        $naughtiesIds = $_POST['naughties'] ?? [];
+
+        foreach ($naughtiesIds as $naughtyId) {
+            Database::query(
+                'insert into superheroe_supernaughty (supernaughty_id, superheroe_id) values (:naughtyId, :heroeId)',
+                ['naughtyId' => $naughtyId, 'heroeId' => $heroeId]
+            );
+        }
+    }
+
+    require __DIR__.'/../templates/association.php';
+});
+
 /**
  * Permet d'exécuter l'application.
  * Ce code doit être la dernière ligne du fichier.

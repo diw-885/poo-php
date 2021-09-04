@@ -18,7 +18,13 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($heroes as $heroe) { ?>
+                <?php foreach ($heroes as $heroe) {
+                    $naughties = Database::select('
+                        select * from supernaughties sn
+                        inner join superheroe_supernaughty sr on sr.supernaughty_id = sn.id
+                        where sr.superheroe_id = :heroeId
+                    ', ['heroeId' => $heroe->id]);
+                ?>
                     <tr>
                         <td scope="row"><?= $heroe->id; ?></td>
                         <td>
@@ -28,7 +34,11 @@
                         <td><?= $heroe->power; ?></td>
                         <td><?= $heroe->identity; ?></td>
                         <td><?= $heroe->universe; ?></td>
-                        <td>???</td>
+                        <td>
+                            <?= implode(', ', array_map(function ($naughty) {
+                                return $naughty->name;
+                            }, $naughties)); ?>
+                        </td>
                         <td>
                             <a href="<?= BASE_URL; ?>hero/<?= $heroe->id; ?>/modifier" class="btn btn-info">Modifier</a>
                             <a href="<?= BASE_URL; ?>hero/<?= $heroe->id; ?>/supprimer" class="btn btn-danger">Supprimer</a>

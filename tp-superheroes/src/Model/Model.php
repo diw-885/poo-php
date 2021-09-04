@@ -27,7 +27,7 @@ abstract class Model
     {
         $table = static::$table;
 
-        return \Database::select("select * from $table where id = :id", ['id' => $id]);
+        return \Database::selectOne("select * from $table where id = :id", ['id' => $id]);
     }
 
     /**
@@ -35,6 +35,30 @@ abstract class Model
      */
     public function save()
     {
-        
+        \Database::query(
+            'insert into supernaughties (name, hobby, identity, universe) values (:name, :hobby, :identity, :universe)',
+            ['name' => $this->name, 'hobby' => $this->hobby, 'identity' => $this->identity, 'universe' => $this->universe]
+        );
+    }
+
+    /**
+     * Permet de mettre à jour une instance dans la BDD
+     */
+    public function update($id)
+    {
+        \Database::query(
+            'update supernaughties set name = :name, hobby = :hobby, identity = :identity, universe = :universe where id = :id',
+            ['id' => $id, 'name' => $this->name, 'hobby' => $this->hobby, 'identity' => $this->identity, 'universe' => $this->universe]
+        );
+    }
+
+    /**
+     * Permet de supprimer une instance de la BDD
+     */
+    public static function delete($id)
+    {
+        $table = static::$table;
+
+        return \Database::query("delete from $table where id = :id", ['id' => $id]);
     }
 }

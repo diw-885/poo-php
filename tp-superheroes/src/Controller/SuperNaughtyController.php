@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+use Model\SuperNaughty;
+
 class SuperNaughtyController
 {
     public function create()
@@ -13,14 +15,14 @@ class SuperNaughtyController
 
     public function list()
     {
-        $naughties = \Database::select('select * from supernaughties');
+        $naughties = SuperNaughty::all();
 
         require __DIR__.'/../../templates/naughties/list.php';
     }
 
     public function edit($id)
     {
-        $naughty = \Database::selectOne('select * from supernaughties where id = :id', ['id' => $id]);
+        $naughty = SuperNaughty::find($id);
         $errors = $this->handleForm('update', $id);
 
         require __DIR__.'/../../templates/naughties/edit.php';
@@ -28,7 +30,7 @@ class SuperNaughtyController
 
     public function delete($id)
     {
-        \Database::query('delete from supernaughties where id = :id', ['id' => $id]);
+        SuperNaughty::delete($id);
 
         header('Location: '.BASE_URL.'vilains');
     }
@@ -40,39 +42,15 @@ class SuperNaughtyController
         // Traitement du formulaire
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Récupèration et clean des valeurs du formulaire
-            $name = trim(htmlspecialchars($_POST['name']));
-            $hobby = trim(htmlspecialchars($_POST['hobby']));
-            $identity = trim(htmlspecialchars($_POST['identity']));
-            $universe = trim(htmlspecialchars($_POST['universe']));
-
-            if (empty($name)) {
-                $errors['name'] = 'Le nom est vide.';
-            }
-
-            if (empty($hobby)) {
-                $errors['hobby'] = 'Le passe temps est vide.';
-            }
-
-            if (empty($identity)) {
-                $errors['identity'] = 'L\'identité est vide.';
-            }
-
-            if (empty($universe)) {
-                $errors['universe'] = 'L\'univers est vide.';
-            }
+            $naughty = new SuperNaughty($_POST);
+            $naughty->validate();
 
             if (empty($errors)) {
-                $bindings = ['name' => $name, 'hobby' => $hobby, 'identity' => $identity, 'universe' => $universe];
-
-                $sql = $type === 'create'
-                    ? 'insert into supernaughties (name, hobby, identity, universe) values (:name, :hobby, :identity, :universe)'
-                    : 'update supernaughties set name = :name, hobby = :hobby, identity = :identity, universe = :universe where id = :id';
-
-                if ($type !== 'create') {
-                    $bindings['id'] = $id;
+                if ($type === 'create') {
+                    $naughty->save();
+                } else {
+                    $naughty->update($id);
                 }
-
-                \Database::query($sql, $bindings);
 
                 header('Location: '.BASE_URL.'vilains');
             }

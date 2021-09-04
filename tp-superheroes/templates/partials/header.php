@@ -34,6 +34,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASE_URL; ?>vilains/nouveau">Créer un Vilain</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL; ?>association">Association</a>
+                        </li>
                     </ul>
                 </div>
             </div>

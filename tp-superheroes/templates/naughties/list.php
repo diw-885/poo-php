@@ -1,4 +1,6 @@
-<?php require __DIR__.'/../partials/header.php'; ?>
+<?php
+
+require __DIR__.'/../partials/header.php'; ?>
 
 <div class="container py-4">
     <h1>Vilains</h1>
@@ -28,7 +30,9 @@
                         <td><?= $naughty->hobby; ?></td>
                         <td><?= $naughty->identity; ?></td>
                         <td><?= $naughty->universe; ?></td>
-                        <td>???</td>
+                        <td>
+                            <?= \Model\SuperNaughty::enemies($naughty->id); ?>
+                        </td>
                         <td>
                             <a href="<?= BASE_URL; ?>vilain/<?= $naughty->id; ?>/modifier" class="btn btn-info">Modifier</a>
                             <a href="<?= BASE_URL; ?>vilain/<?= $naughty->id; ?>/supprimer" class="btn btn-danger">Supprimer</a>
