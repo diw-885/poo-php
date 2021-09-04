@@ -1,7 +1,7 @@
 <?php require __DIR__.'/../partials/header.php'; ?>
 
 <div class="container py-4">
-    <h1>Héros</h1>
+    <h1>Héros  (<?= count($heroes); ?>)</h1>
 
     <div class="card shadow">
         <table class="table mb-0">
@@ -55,6 +55,9 @@
                 <?php } ?>
             </tbody>
         </table>
+    </div>
+
+    <h1>Les ennemis de Batman sont : <?php dump($batmanEnemies); ?></h1>
 </div>
 
 <?php require __DIR__.'/../partials/footer.php'; ?>

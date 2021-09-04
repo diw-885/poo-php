@@ -3,7 +3,7 @@
 require __DIR__.'/../partials/header.php'; ?>
 
 <div class="container py-4">
-    <h1>Vilains</h1>
+    <h1>Vilains (<?= count($naughties); ?>)</h1>
 
     <div class="card shadow">
         <table class="table mb-0">
@@ -49,6 +49,7 @@ require __DIR__.'/../partials/header.php'; ?>
                 <?php } ?>
             </tbody>
         </table>
+    </div>
 </div>
 
 <?php require __DIR__.'/../partials/footer.php'; ?>

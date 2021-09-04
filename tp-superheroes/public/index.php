@@ -91,6 +91,12 @@ $router->map('GET|POST', '/heros/nouveau', function () {
 // Listing des supers héros
 $router->map('GET', '/heros', function () {
     $heroes = Database::select('select * from superheroes');
+    $batmanEnemies = Database::select('
+        select sn.name from supernaughties sn
+        inner join superheroe_supernaughty sr on sn.id = sr.supernaughty_id
+        inner join superheroes sh on sh.id = sr.superheroe_id
+        where sh.name = "Batman"
+    ');
 
     require __DIR__.'/../templates/heroes/list.php';
 });
