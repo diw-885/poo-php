@@ -43,7 +43,7 @@ class SuperNaughtyController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Récupèration et clean des valeurs du formulaire
             $naughty = new SuperNaughty($_POST);
-            $naughty->validate();
+            $errors = $naughty->validate();
 
             if (empty($errors)) {
                 if ($type === 'create') {
