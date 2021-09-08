@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 03 sep. 2021 à 13:02
+-- Généré le : mer. 08 sep. 2021 à 07:14
 -- Version du serveur : 10.6.4-MariaDB
 -- Version de PHP : 7.4.23
 
@@ -36,6 +36,13 @@ CREATE TABLE `superheroes` (
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `superheroes`
+--
+
+INSERT INTO `superheroes` (`id`, `name`, `power`, `identity`, `universe`, `image`) VALUES
+(4, 'Batman', 'Riche et entraîné', 'Bruce Wayne', 'Marvel', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +53,15 @@ CREATE TABLE `superheroe_supernaughty` (
   `superheroe_id` int(11) NOT NULL,
   `supernaughty_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `superheroe_supernaughty`
+--
+
+INSERT INTO `superheroe_supernaughty` (`superheroe_id`, `supernaughty_id`) VALUES
+(4, 1),
+(4, 1),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -61,6 +77,14 @@ CREATE TABLE `supernaughties` (
   `universe` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `supernaughties`
+--
+
+INSERT INTO `supernaughties` (`id`, `name`, `hobby`, `identity`, `universe`, `image`) VALUES
+(1, 'Joker', 'Test', 'Test', 'Marvel', NULL),
+(2, 'Thanos', 'Test', 'Thanos', 'Marvel', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -93,13 +117,13 @@ ALTER TABLE `supernaughties`
 -- AUTO_INCREMENT pour la table `superheroes`
 --
 ALTER TABLE `superheroes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `supernaughties`
 --
 ALTER TABLE `supernaughties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
