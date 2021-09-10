@@ -37,3 +37,4 @@ $class = $_GET['animal'] ?? 'Cat';
 $animal = new $class();
 echo $animal->cry();
 echo $animal->walk();
+echo $animal->eat();
