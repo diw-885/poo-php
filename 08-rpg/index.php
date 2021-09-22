@@ -9,6 +9,15 @@ $aragorn = new Warrior('Aragorn');
 $legolas = new Hunter('Legolas');
 $gandalf = new Magus('Gandalf');
 
+// On ajoute des personnages dans le jeu
+$game
+    ->addPlayer($aragorn)
+    ->addPlayer($legolas)
+    ->addPlayer($gandalf)
+;
+
+var_dump($game);
+
 var_dump($aragorn);
 echo '<br />';
 var_dump($legolas);

@@ -40,3 +40,12 @@ super_print_r($bankAccount01->getOwners()); // Matthieu, Marina
 echo '<br /><br />';
 
 super_print_r(BankAccount::$accountList);
+
+/**
+ * On va ajouter un système de livret qui va hériter d'un compte standard.
+ */
+$savingAccount01 = new SavingAccount(123457, 'Matthieu'); // Matthieu a 0 sur son livret
+$savingAccount01->depositMoney(1000); // Matthieu a 1000 sur son livret
+$savingAccount01->applyInterest(0.75); // Augmente le montant du livret de 0,75%
+$savingAccount01->withdrawMoney(1000); // Matthieu a 7,5 sur son livret
+echo $savingAccount01->getBalance(); // Renvoie 7,5

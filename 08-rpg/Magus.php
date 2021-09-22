@@ -18,4 +18,11 @@ class Magus extends Character
 
         return $this;
     }
+
+    public function attack($character)
+    {
+        // On supprime la fonction attack
+        // pour les mages
+        return;
+    }
 }
